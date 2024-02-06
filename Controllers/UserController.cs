@@ -21,7 +21,7 @@ namespace KavifxApp.Controllers
             return View();
         }
 
-        public async Task<JsonResult> GetUsersAsync()
+        public async Task<IActionResult> GetUsers()
         {
             byte[] TokenBytes = null;
             if (HttpContext.Session.TryGetValue("JWTToken", out TokenBytes))
@@ -34,10 +34,10 @@ namespace KavifxApp.Controllers
                     string JsonString = await response.Content.ReadAsStringAsync();
                     var UserList = JsonConvert.DeserializeObject<List<UserDTO>>(JsonString);
 
-                    return Json(UserList, JsonRequestBehavior.AllowGet);
+                    return Json(UserList);
                 }
             }
-
+            return View();
         }
     }
 }
