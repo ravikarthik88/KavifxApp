@@ -1,0 +1,16 @@
+﻿@using System.Security.Claims
+<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+    @if (User.Identity.IsAuthenticated == true)
+    {
+        <span class="navbar-text text-white">Hello @User.FindFirst(ClaimTypes.Email).Value!</span>
+        <li class="nav-item">
+            <a class="nav-link text-white" asp-controller="Account" asp-action="Logout">Logout</a>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-white" asp-controller="Account" asp-action="Login">LogIn</a>
+        </li>
+    }
+</ul>
