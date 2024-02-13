@@ -21,33 +21,21 @@ namespace KavifxApp.Models.DTO
         [Required, DataType(DataType.Password)]
         public string Password { get; set; }
         [Required,Compare("Password"),DataType(DataType.Password)]
-        public string ConfirmPassword { get; set; }        
-
+        public string ConfirmPassword { get; set; }
     }
 
-    public class UserProfileViewModel
-    {
-        [Required]
-        public string FirstName { get; set; }
-        [Required]
-        public string LastName { get; set; }
-
-        [Required, EmailAddress]
-        public string Email { get; set; }
-        [Required]
-        public string OrganizationName { get; set; }
-        [Required]
-        public string Location { get; set; }
-        [Required, DataType(DataType.Date)]
-        public string DateOfBirth { get; set; }
-        [Required, DataType(DataType.PhoneNumber)]
+    public class UserProfileViewModel 
+    { 
+        public int UserId { get; set; }
         public string PhoneNumber { get; set; }
+        public string DateOfBirth { get; set; }
+        public string Organization_Name { get; set; }
+        public string Location { get; set; }
+
         [NotMapped]
         public IFormFile ProfilePicture { get; set; }
-        public byte[] ProfilePictureData { get; set; }
         public string ProfilePictureUrl { get; set; }
     }
-
 
     public class RoleViewModel
     {

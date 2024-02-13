@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.Text;
@@ -25,6 +26,13 @@ builder.Services.AddAuthentication(opts =>
 });
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.MemoryBufferThreshold = Int32.MaxValue;
+    options.ValueLengthLimit = Int32.MaxValue;
+    options.MultipartBodyLengthLimit = Int64.MaxValue;
+});
 
 var app = builder.Build();
 
