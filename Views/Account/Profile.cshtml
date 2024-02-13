@@ -1,0 +1,101 @@
+﻿@model KavifxApp.Models.DTO.UserProfileViewModel
+
+@{
+    ViewData["Title"] = "User Profile";
+    Layout = "~/Views/Shared/_dashboardlayout.cshtml";
+}
+
+<style>
+    .profile-picture {
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        margin-bottom: 20px;
+    }
+
+</style>
+
+<form asp-controller="Account" asp-action="Profile" method="post" enctype="multipart/form-data" class="user">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <div class="col-xl-4 col-lg-4">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Profile Picture</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body text-center">
+                   
+                        <img src="https://placehold.co/250x250?text=UserProfile" class="profile-picture" id="profile-picture-preview" />
+                      @*   <img src="data:image/*;base64,@(Convert.ToBase64String(Model.ProfilePictureData))" class="profile-picture" id="profile-picture-preview" /> *@
+                   
+                    <input type="file" class="form-control form-control-user d-none" id="profile-picture-upload" asp-for="ProfilePicture" onchange="previewProfilePicture(event)" />
+                    <div class="clearfix py-2">&nbsp;</div>
+                    <button class="btn btn-primary btn-sm btn-block" type="button" onclick="document.getElementById('profile-picture-upload').click()"><i class="fas fa-cloud-upload-alt"></i> Upload </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-8 col-lg-8">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Account Details</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="form-group row">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <input type="text" class="form-control form-control-user" asp-for="FirstName" placeholder="First Name..." />
+                            <span class="text-danger" asp-validation-for="FirstName"></span>
+                        </div>
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <input type="tel" class="form-control form-control-user" asp-for="LastName" placeholder="Last Name..." />
+                            <span class="text-danger" asp-validation-for="LastName"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12 mb-3 mb-sm-0">
+                            <input type="email" class="form-control form-control-user" asp-for="Email" placeholder="Email Address..."/>
+                            <span class="text-danger" asp-validation-for="Email"></span>
+                        </div>                       
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <input type="text" class="form-control form-control-user" asp-for="OrganizationName" placeholder="Organization Name..." />
+                            <span class="text-danger" asp-validation-for="OrganizationName"></span>
+                        </div>
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <input type="text" class="form-control form-control-user" asp-for="Location" placeholder="Location..." />
+                            <span class="text-danger" asp-validation-for="Location"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <input type="tel" class="form-control form-control-user" asp-for="PhoneNumber" placeholder="Phone Number..." />
+                            <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+                        </div>
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <input type="date" class="form-control form-control-user" asp-for="DateOfBirth" placeholder="Date of Birth..." />
+                            <span class="text-danger" asp-validation-for="DateOfBirth"></span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-sm" type="submit"> Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+function previewProfilePicture(event) {
+        var input = event.target;
+        var reader = new FileReader();
+        reader.onload = function () {
+            var dataURL = reader.result;
+            var profilePicturePreview = document.getElementById('profile-picture-preview');
+            profilePicturePreview.src = dataURL;
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+</script>

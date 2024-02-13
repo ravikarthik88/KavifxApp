@@ -1,4 +1,5 @@
-﻿@model KavifxApp.Models.DTO.UserDTO
+﻿@using Newtonsoft.Json.Linq
+@model KavifxApp.Models.DTO.RegisterViewModel
 @{
     ViewData["Title"] = "Register";
     Layout = null;
@@ -52,7 +53,7 @@
                                             <div class="col-sm-6">
                                                 @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control form-control-user", type = "text", placeholder = "Confirm Password" })
                                                 @Html.ValidationMessageFor(m => m.ConfirmPassword)
-                                            </div>
+                                            </div>                                            
                                         </div>
                                         <div class="form-group">
                                             <input type="submit" class="btn btn-primary btn-user btn-block" value="Register Account" />
